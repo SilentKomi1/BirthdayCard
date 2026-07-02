@@ -364,21 +364,21 @@
         </select>
     </div>
 
-    <h1 id="title-text">You have an unread letter...</h1>
+    <h1 id="title-text">You have a letter sent by an owl... <br>(just like in harry potter)</h1>
 
     <div class="card-viewport">
         <div class="envelope-wrapper" onclick="openEnvelope(this)">
             <div class="click-hint">Click to Open ✉️</div>
             
-            <div class="letter-paper" onclick="event.stopPropagation();">happy birthday</div>
+            <div class="letter-paper" onclick="event.stopPropagation();">happy irthday</div>
         </div>
     </div>
 
     <script>
         const playlist = [
-            { src: "Out Getting Ribs.mp3", cover: "cover1.jpg", title: "Out Getting Ribs", artist: "Feeling Blew" },
-            { src: "Calla.mp3", cover: "cover2.jpg", title: "Calla", artist: "wave to earth" },
-            { src: "Moonlight.mp3", cover: "cover3.jpg", title: "Moonlight", artist: "Chase Atlantic" }
+            { src: "out_getting_ribs.mp3", cover: "cover1.jpg", title: "Out Getting Ribs", artist: "Feeling Blew" },
+            { src: "calla.mp3", cover: "cover2.jpg", title: "Calla", artist: "wave to earth" },
+            { src: "moonlight.mp3", cover: "cover3.jpg", title: "Moonlight", artist: "Chase Atlantic" }
         ];
         
         let currentTrackIndex = 0;
@@ -387,7 +387,7 @@
         const music = document.getElementById('bg-music');
         const widget = document.getElementById('music-widget');
         const dropdown = document.getElementById('track-dropdown');
-        const correctPin = "12345"; // Handily set to 5 digits here
+        const correctPin = "46854"; // Handily set to 5 digits here
 
         window.onload = () => {
             document.querySelectorAll('.pin-digit')[0].focus();
