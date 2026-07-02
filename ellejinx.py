@@ -78,7 +78,7 @@ and you reach to me when you are stressed and down or need someone to lend and e
 yeah i love you too. I know I know. 
 and can you please clock me the next time you feel like it. tell me that i annoying you and you actually mean it. but also tell me what i did wrong. so that i can learn. 
 
-ohhhh and the song i said that now reminds me of u each time i listen to it. it’s calla by wave to earth. let me give you context. so wave to earth are my top 3 most listened to artist in my lifetime. my friends know that when wave to earth is mentioned it means i’m spawning either in three seconds or they are talking about me. i am one with wave to earth. i love them so much to the point that their songs are going to be played at my wedding. i want to collected their vinyls when i have money and i want to buy their lego album cover and i want to go to their concert. OMDSSSSSS BRO LIKE I BOUGHT THEIR TICKETS JUST NOW. I BOUGHT THE TICKETS. BRO CAN YOU HEAR ME I BOUGHT THE TICKETS. IM GOING IN SEPTEMBER. NO OCT. ANYWAY I LOVE THEM SO MUCH. i have cried and slept to their songs and my sister and dagim have written letters to me that features wave to earth. okay now that we have context out of the way, why calla. the lyrics literally says i don’t want this to be a daydream. i want you to be real because at times you are too good to be true. then it says, someone said that your time will be over soon. i am a hard believer that all good things must come to an end.
+ohhhh and the song i said that now reminds me of u each time i listen to it. it’s calla by wave to earth. let me give you context. so wave to earth are my top 3 most listened to artist in my lifetime. my friends know that when wave to earth is mentioned it means i’m spawning either in three seconds or they are talking about me. i am one with wave to earth. i love them so much to the point that their songs are going to be played at my wedding. i want to collected their vinyls when i have money and i want to buy their lego album  and i want to go to their concert. OMDSSSSSS BRO LIKE I BOUGHT THEIR TICKETS JUST NOW. I BOUGHT THE TICKETS. BRO CAN YOU HEAR ME I BOUGHT THE TICKETS. IM GOING IN SEPTEMBER. NO OCT. ANYWAY I LOVE THEM SO MUCH. i have cried and slept to their songs and my sister and dagim have written letters to me that features wave to earth. okay now that we have context out of the way, why calla. the lyrics literally says i don’t want this to be a daydream. i want you to be real because at times you are too good to be true. then it says, someone said that your time will be over soon. i am a hard believer that all good things must come to an end.
 
 the white rabbit has traumatized me for life and i hate it. and i hate to think that there would be a time that we aren’t close the way we are right now. but you can always grow back. if you don’t have enough sunlight i will blow the clouds away for you. it’s like saying no matter what happens i will be there for you and help you grow. and you actually do. whenever i am with you i don’t seem to care what other people think. you blow the social anxiety away for me. and you watch me grow. so there you go my analysis for the song calla and why it reminds me of you now. and for rest of my life too. this is phenomenal chat.
 
@@ -468,9 +468,9 @@ FUCK U NIGGA YOU ARE READING THE ENTIRE THING IDGAF."""
             <script>
                 // FIXED: Moonlight now properly has its .mp3 extension mapping
                 const playlist = [
-                    { src: "Out Getting Ribs.mp3", cover: "cover1.jpg", title: "Out Getting Ribs", artist: "Feeling Blew" },
-                    { src: "Moonlight.mp3", cover: "cover3.jpg", title: "Moonlight", artist: "Chase Atlantic" },
-                    { src: "Calla.mp3", cover: "cover2.jpg", title: "Calla", artist: "wave to earth" }
+                    { src: "out_getting_ribs.mp3", cover: "cover1.jpg", title: "Out Getting Ribs", artist: "Feeling Blew" },
+                    { src: "moonlight.mp3", cover: "cover3.jpg", title: "Moonlight", artist: "Chase Atlantic" },
+                    { src: "calla.mp3", cover: "cover2.jpg", title: "Calla", artist: "wave to earth" }
                 ];
                 
                 let currentTrackIndex = 0;
