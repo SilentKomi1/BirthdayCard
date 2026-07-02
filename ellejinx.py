@@ -468,9 +468,9 @@ FUCK U NIGGA YOU ARE READING THE ENTIRE THING IDGAF."""
             <script>
                 // FIXED: Moonlight now properly has its .mp3 extension mapping
                 const playlist = [
-                    { src: "/Out Getting Ribs.mp3", cover: "/cover1.jpg", title: "Out Getting Ribs", artist: "Feeling Blew" },
-                    { src: "/Moonlight.mp3", cover: "/cover3.jpg", title: "Moonlight", artist: "Chase Atlantic" },
-                    { src: "/Calla.mp3", cover: "/cover2.jpg", title: "Calla", artist: "wave to earth" }
+                    { src: "Out Getting Ribs.mp3", cover: "cover1.jpg", title: "Out Getting Ribs", artist: "Feeling Blew" },
+                    { src: "Moonlight.mp3", cover: "cover3.jpg", title: "Moonlight", artist: "Chase Atlantic" },
+                    { src: "Calla.mp3", cover: "cover2.jpg", title: "Calla", artist: "wave to earth" }
                 ];
                 
                 let currentTrackIndex = 0;
