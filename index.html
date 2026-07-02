@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght=300..700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #0A1F16;
+            font-family: "Fredoka", sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #pin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #0A1F16;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+
+        .pin-box {
+            background-color: #123024;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 200, 83, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            text-align: center;
+            width: 320px;
+        }
+
+        .pin-box h2 {
+            color: #E0F2F1;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+        }
+
+        .pin-input-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .pin-digit {
+            width: 40px;
+            height: 50px;
+            background-color: #0A1F16;
+            border: 2px solid rgba(224, 242, 241, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: #00C853;
+            font-weight: bold;
+        }
+
+        .pin-digit:focus {
+            border-color: #00C853;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.3);
+        }
+
+        #error-msg {
+            color: #ff5252;
+            font-size: 0.9rem;
+            min-height: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            font-family: "Pacifico", cursive;
+            color: #00C853;
+            font-size: 2.5rem;
+            margin-bottom: 80px;
+            text-shadow: 0 0 10px rgba(0, 200, 83, 0.3);
+            z-index: 10;
+        }
+
+        .card-viewport {
+            position: relative;
+            width: 450px;
+            height: 350px; 
+            display: flex;
+            align-items: flex-end; 
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 450px;
+            height: 300px;
+            background-color: #123024;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        .envelope-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-left: 225px solid transparent;
+            border-right: 225px solid transparent;
+            border-top: 150px solid #123024; 
+            transform-origin: top;
+            transition: transform 0.4s ease-in-out;
+            z-index: 6;
+        }
+
+        .click-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00C853;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: opacity 0.3s;
+        }
+        
+        .instagram-music-wrapper {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .music-select-dropdown {
+            background: rgba(18, 48, 36, 0.95);
+            border: 1px solid rgba(0, 200, 83, 0.3);
+            border-radius: 12px;
+            color: #E0F2F1;
+            font-family: "Fredoka", sans-serif;
+            padding: 8px;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            box-sizing: border-box;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .instagram-music-container {
+            display: flex;
+            align-items: center;
+            background: rgba(18, 48, 36, 0.6);
+            padding: 10px 18px 10px 10px;
+            border-radius: 50px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 200, 83, 0.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .album-art-wrapper {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+
+        .album-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            z-index: 12;
+            object-fit: cover;
+            box-shadow: 3px 0 10px rgba(0,0,0,0.3);
+        }
+
+        .vinyl-disk {
+            position: absolute;
+            top: 3px;
+            left: 20px; 
+            width: 54px;
+            height: 54px;
+            background: radial-gradient(circle, #050505 30%, #222 31%, #050505 40%, #111 60%, #050505 70%);
+            border-radius: 50%;
+            z-index: 11;
+            transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px dashed rgba(255,255,255,0.05);
+        }
+
+        .vinyl-disk::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background-color: #1B4D3E;
+            border-radius: 50%;
+            border: 2px solid #050505;
+        }
+
+        .instagram-music-container.playing .vinyl-disk {
+            left: 32px; 
+            animation: spinDisk 3.5s linear infinite;
+        }
+
+        @keyframes spinDisk {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .track-details {
+            margin-left: 45px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            pointer-events: none;
+            padding-right: 25px;
+        }
+
+        .music-select-dropdown option {
+            background: #123024;
+            color: #E0F2F1;
+            padding: 6px;
+        }
+
+        .music-hint-tooltip {
+            position: absolute;
+            bottom: -80px;
+            right: 20px;
+            background-color: #00C853;
+            color: #050505;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: 0 6px 15px rgba(0, 200, 83, 0.4);
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 150;
+        }
+
+        .music-hint-tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 35px;
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent #00C853 transparent;
+        }
+
+        .music-hint-tooltip.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-paper {
+            position: absolute;
+            bottom: 0px; 
+            left: 25px;
+            width: 400px;
+            height: 380px; 
+            background-color: #1B4D3E;
+            border: 2px solid #00C853;
+            border-radius: 10px;
+            padding: 25px;
+            box-sizing: border-box;
+            overflow-y: auto; 
+            color: #E0F2F1;
+            opacity: 0; 
+            transition: transform 0.6s ease-in-out 0.2s, opacity 0.4s ease-in-out 0.2s; 
+            z-index: 2;
+            white-space: pre-wrap;
+        }
+
+        .letter-paper::-webkit-scrollbar { width: 6px; }
+        .letter-paper::-webkit-scrollbar-thumb { background: #00C853; border-radius: 10px; }
+
+        .envelope-wrapper.open::before {
+            transform: rotateX(180deg);
+            z-index: 1; 
+        }
+
+        .envelope-wrapper.open .letter-paper {
+            opacity: 1;
+            z-index: 8; 
+            animation: liftAndSettle 1.4s ease-in-out forwards;
+        }
+
+        @keyframes liftAndSettle {
+            0% { transform: translateY(0); }
+            65% { transform: translateY(-200px); }
+            100% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="pin-overlay">
+        <div class="pin-box">
+            <h2>Enter Security Code</h2>
+            <div class="pin-input-container">
+                <input type="text" class="pin-digit" maxlength="1" oninput="moveNext(this, 0)" onkeydown="checkBack(event, 0)">
+                <input type="text" class="pin-digit" maxlength="1" oninput="moveNext(this, 1)" onkeydown="checkBack(event, 1)">
+                <input type="text" class="pin-digit" maxlength="1" oninput="moveNext(this, 2)" onkeydown="checkBack(event, 2)">
+                <input type="text" class="pin-digit" maxlength="1" oninput="moveNext(this, 3)" onkeydown="checkBack(event, 3)">
+                <input type="text" class="pin-digit" maxlength="1" oninput="moveNext(this, 4)" onkeydown="checkBack(event, 4)">
+            </div>
+            <p id="error-msg"></p>
+        </div>
+    </div>
+
+    <audio id="bg-music" onended="autoNextTrack()"></audio>
+
+    <div class="instagram-music-wrapper">
+        <div id="music-widget" class="instagram-music-container" onclick="focusDropdown()">
+            <div class="album-art-wrapper">
+                <img id="display-cover" class="album-cover" src="cover1.jpg" alt="Cover">
+                <div class="vinyl-disk"></div>
+            </div>
+            <div class="track-details">
+                <p id="display-title" style="margin:0; font-size:0.9rem; font-weight:600; color:#E0F2F1; letter-spacing:0.5px;">Out Getting Ribs</p>
+                <p id="display-artist" style="margin:2px 0 0 0; font-size:0.75rem; color:#00C853; opacity:0.8;">Feeling Blew</p>
+            </div>
+            
+            <div id="hint-bubble" class="music-hint-tooltip">🎵 Click to change the song!</div>
+        </div>
+
+        <select id="track-dropdown" class="music-select-dropdown" onchange="selectTrack(this.value)">
+            <option value="0">Out Getting Ribs - Feeling Blew</option>
+            <option value="1">Calla - wave to earth</option>
+            <option value="2">Moonlight - Chase Atlantic</option>
+        </select>
+    </div>
+
+    <h1 id="title-text">You have an unread letter...</h1>
+
+    <div class="card-viewport">
+        <div class="envelope-wrapper" onclick="openEnvelope(this)">
+            <div class="click-hint">Click to Open ✉️</div>
+            
+            <div class="letter-paper" onclick="event.stopPropagation();">happy birthday</div>
+        </div>
+    </div>
+
+    <script>
+        const playlist = [
+            { src: "Out Getting Ribs.mp3", cover: "cover1.jpg", title: "Out Getting Ribs", artist: "Feeling Blew" },
+            { src: "Calla.mp3", cover: "cover2.jpg", title: "Calla", artist: "wave to earth" },
+            { src: "Moonlight.mp3", cover: "cover3.jpg", title: "Moonlight", artist: "Chase Atlantic" }
+        ];
+        
+        let currentTrackIndex = 0;
+        let appUnlocked = false;
+
+        const music = document.getElementById('bg-music');
+        const widget = document.getElementById('music-widget');
+        const dropdown = document.getElementById('track-dropdown');
+        const correctPin = "12345"; // Handily set to 5 digits here
+
+        window.onload = () => {
+            document.querySelectorAll('.pin-digit')[0].focus();
+            music.src = playlist[currentTrackIndex].src;
+        };
+
+        function moveNext(input, index) {
+            if (input.value.length === 1 && index < 4) {
+                document.querySelectorAll('.pin-digit')[index + 1].focus();
+            }
+            verifyPinAssembly();
+        }
+
+        function checkBack(event, index) {
+            if (event.key === "Backspace" && !event.target.value && index > 0) {
+                document.querySelectorAll('.pin-digit')[index - 1].focus();
+            }
+        }
+
+        function verifyPinAssembly() {
+            const digits = document.querySelectorAll('.pin-digit');
+            let typedCode = "";
+            digits.forEach(d => typedCode += d.value);
+
+            if (typedCode.length === 5) {
+                if (typedCode === correctPin) {
+                    appUnlocked = true;
+                    document.getElementById('pin-overlay').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('pin-overlay').style.visibility = 'hidden';
+                        triggerMusicHint();
+                    }, 500);
+                    
+                    playTrack();
+                } else {
+                    document.getElementById('error-msg').innerText = "Incorrect Code. Try again.";
+                    digits.forEach(d => d.value = "");
+                    digits[0].focus();
+                }
+            }
+        }
+
+        function triggerMusicHint() {
+            const hint = document.getElementById('hint-bubble');
+            hint.classList.add('visible');
+            
+            setTimeout(() => {
+                hint.classList.remove('visible');
+            }, 4000);
+        }
+
+        function focusDropdown() {
+            if (!appUnlocked) return;
+            dropdown.focus();
+        }
+
+        function updateUIElements() {
+            document.getElementById('display-cover').src = playlist[currentTrackIndex].cover;
+            document.getElementById('display-title').innerText = playlist[currentTrackIndex].title;
+            document.getElementById('display-artist').innerText = playlist[currentTrackIndex].artist;
+            dropdown.value = currentTrackIndex;
+        }
+
+        function playTrack() {
+            music.src = playlist[currentTrackIndex].src;
+            music.load();
+            music.play().then(() => {
+                widget.classList.add('playing');
+            }).catch(err => console.log("Playback interaction required"));
+        }
+
+        function selectTrack(index) {
+            if (!appUnlocked) return;
+            currentTrackIndex = parseInt(index);
+            updateUIElements();
+            playTrack();
+        }
+
+        function autoNextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            updateUIElements();
+            playTrack();
+        }
+
+        function openEnvelope(element) {
+            if (!appUnlocked) return;
+            if (!element.classList.contains('open')) {
+                element.classList.add('open');
+                document.getElementById('title-text').innerText = "Happy Birthday! 🎉";
+            }
+        }
+    </script>
+
+</body>
+</html>
